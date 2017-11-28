@@ -16,7 +16,11 @@ gitRev=`git rev-list  "$beforeC".."$afterC"`
 
 for hashes in $gitRev
  do
+<<<<<<< HEAD
    getResult=$getResult`git branch  --contains $hashes | sed s/\*//g | sed 's/ *//g' | grep "master"`$'\n'
+=======
+   getResult=$getResult`git branch  --contains $hashes | sed s/\*//g | sed 's/ *//g' | grep "$grepRegex"`$'\n'
+>>>>>>> ecb427d... changed
    sortResult=`echo $getResult | xargs -n1 | sort -fu`
 done
 

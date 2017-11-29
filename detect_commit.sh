@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-set -eo pipefail
+#set -eo pipefail
 #source /home/graphbuildertmp/ULAutomation.jenkins/install/include.sh
 REPOPATH="$HOME/ULAutomation.jenkins/tmp/tmp/"
 BUILDPROJECTS="testProj"
@@ -20,9 +20,7 @@ for project in $BUILDPROJECTS
 do
  	
   echo  git -C $REPOPATH/$cFolder/ pull | grep -e "^Already up-to-date\.$"
-set +e
   git -C $REPOPATH/$cFolder/ pull  | grep -e "^Already up-to-date\.$"
-set -e  
   if [[ $? -ne 0 ]]; then
     ChangesDetected=1 
     echo "Changes detected!"

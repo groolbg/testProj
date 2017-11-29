@@ -18,7 +18,7 @@ fi
 upToDate=0;
 for project in $BUILDPROJECTS
 do
-  git -C $REPOPATH/$cFolder/ pull | grep -e "^Already up-to-date\.$"
+  git -C $REPOPATH/$cFolder/ pull 2>&1 | grep -e "^Already up-to-date\.$"
   if [[ $? -ne 0 ]]; then
     upToDate=1 
   fi

@@ -1,6 +1,6 @@
 #!/bin/bash
-#set -x
-set -eo pipefail
+set -x
+#set -eo pipefail
 
 if [[ $# -ne 2 ]]; then
    echo "2 arguments required - oldhash newhash"
@@ -16,14 +16,14 @@ gitRev=`git rev-list  "$beforeC".."$afterC"`
 
 for hashes in $gitRev
  do
-   getResult=$getResult`git branch  --contains $hashes | sed s/\*//g | sed 's/ *//g' | grep "$grepRegex"`$'\n'
+   getResult=$getResult`git branch  --contains $hashes | sed 's/\*//g' | sed 's/ *//g' | grep "$grepRegex"`$'\n'
    sortResult=`echo $getResult | xargs -n1 | sort -fu`
 done
 
 for pushes in $sortResult
 do
-echo  curl "http://ulautomat:2a633d89702d42e402ff6920bc313d34@ulautomation2017.abilixsoft.eu:8080/job/testGraphPrj/buildWithParameters?token=asd&vTag=$pushes"
+echo  curl "http://ulautomat:2a633d89702d42e402ff6920bc313d34@ulautomation2017.abilixsoft.eu:8080/job/Graphbuild/buildWithParameters?token=UGg4VPdENF8eTVN5dtHn&vTag=$pushes"
 
-curl "http://ulautomat:2a633d89702d42e402ff6920bc313d34@ulautomation2017.abilixsoft.eu:8080/job/idf-databaseApi/buildWithParameters?token=asd&vTag=$pushes"
+curl "http://ulautomat:2a633d89702d42e402ff6920bc313d34@ulautomation2017.abilixsoft.eu:8080/job/idf-databaseApi/buildWithParameters?token=test&vTag=$pushes"
 
 done

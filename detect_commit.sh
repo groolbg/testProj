@@ -18,8 +18,11 @@ fi
 ChangesDetected=0;
 for project in $BUILDPROJECTS
 do
+ 	
   echo  git -C $REPOPATH/$cFolder/ pull | grep -e "^Already up-to-date\.$"
-   git -C $REPOPATH/$cFolder/ pull  | grep -e "^Already up-to-date\.$"
+set +e
+  git -C $REPOPATH/$cFolder/ pull  | grep -e "^Already up-to-date\.$"
+set -e  
   if [[ $? -ne 0 ]]; then
     ChangesDetected=1 
     echo "Changes detected!"

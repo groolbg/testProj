@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -x
+set -x
 set -eo pipefail
 #source /home/graphbuildertmp/ULAutomation.jenkins/install/include.sh
 REPOPATH="$HOME/ULAutomation.jenkins/tmp/tmp/"

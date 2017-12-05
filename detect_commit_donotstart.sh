@@ -5,15 +5,15 @@ set -eo pipefail
 REPOPATH="$HOME/ULAutomation.jenkins/tmp/tmp/"
 BUILDPROJECTS="testProj"
 currentFolders=`ls $REPOPATH`
-committer=$2
+committer=$1
 
 #checks if pushes to the repos are made and triggers curl in case there are.
 launchIfNeeded() {
 cFolder=$1
 sendMail=$2
 
-if [[ $# -ne 1 ]]; then
-    echo "Missing argument to function launchIfNeeded. Exacly 1 required. - folderName"
+if [[ $# -ne 2 ]]; then
+    echo "Missing arguments to function launchIfNeeded. Exacly 2 required. - folderName & email"
     exit
 fi
 

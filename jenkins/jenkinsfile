@@ -1,0 +1,46 @@
+pipeline{
+     agent{
+         label 'idf-db-api'
+     }
+ stages {
+        stage('Installing Local') {
+            steps {
+                echo 'Install Local'
+            }
+             post {
+                failure {
+                    emailext( 
+                     body: '$DEFAULT_CONTENT',
+                     attachLog: true, 
+                     compressLog: true, 
+                     subject: '$DEFAULT_SUBJECT $vTag',
+                     to: '$sendTo, $DEFAULT_RECIPIENTS')
+                }
+            }
+        }   
+        stage('Install Remote') {
+            steps {
+                echo 'Installing Remote'
+            }
+           post {
+               success {
+                    emailext( 
+                     body: '$DEFAULT_CONTENT',
+                     attachLog: true, 
+                     compressLog: true, 
+                     subject: '$DEFAULT_SUBJECT $vTag',
+                     to: '$sendTo')
+                }
+                failure {
+                    emailext( 
+                     body: '$DEFAULT_CONTENT',
+                     attachLog: true, 
+                     compressLog: true, 
+                     subject: '$DEFAULT_SUBJECT $vTag',
+                     to: '$sendTo, $DEFAULT_RECIPIENTS')
+                }
+           }
+        }
+    }
+ }
+
